@@ -150,7 +150,7 @@ class _MyHotelState extends State<MyHotel> {
                         AspectRatio(
                           aspectRatio: 1.5,
                           child: Image.network(
-                            'http://192.168.32.41/reshotel_api/uploads/${hotels[index].file_name}',
+                            'http://192.168.32.128/reshotel_api/uploads/${hotels[index].file_name}',
                             fit: BoxFit.cover,
                           ),
                         ),

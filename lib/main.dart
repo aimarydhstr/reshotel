@@ -17,7 +17,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final ApiManager apiManager =
-      ApiManager(baseUrl: 'http://192.168.32.41/reshotel_api');
+      ApiManager(baseUrl: 'http://192.168.32.128/reshotel_api');
   MyApp();
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,6 @@ class MyApp extends StatelessWidget {
           '/login': (context) => MyLogin(),
           '/register': (context) => MyRegister(),
           // '/home': (context) => HomeScreen(),
-          '/register': (context) => MyRegister(),
           '/hotel': (context) => MyHotel(),
         },
         debugShowCheckedModeBanner: false,
