@@ -48,7 +48,7 @@ class _HotelCreateState extends State<HotelCreate> {
       dynamic result = await apiManager.createHotel(
           _image!, name, description, price, location);
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(result)));
+          .showSnackBar(SnackBar(content: Text('Data hotel berhasil ditambahkan')));
       widget.onCreate();
       Navigator.pop(context);
     } else {

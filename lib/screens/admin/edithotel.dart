@@ -51,7 +51,7 @@ class _HotelUpdateState extends State<HotelUpdate> {
     );
 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(response),
+      content: Text('Data hotel berhasil di Update'),
     ));
     widget.onUpdate();
 

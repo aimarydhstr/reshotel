@@ -9,7 +9,7 @@ class ApiManager {
 
   ApiManager({required this.baseUrl});
 
-  Future<String?> authenticate(String username, String password) async {
+  Future<dynamic> authenticate(String username, String password) async {
     try {
       final response = await http.post(
         Uri.parse('$baseUrl/login.php'),
@@ -23,7 +23,10 @@ class ApiManager {
 
         await storage.write(key: 'auth_token', value: token);
 
-        return token;
+        return {
+          'token': jsonResponse['token'],
+          'role': jsonResponse['role'],
+        };
       } else {
         throw Exception('Failed to authenticate: ${response.reasonPhrase}');
       }
@@ -31,7 +34,31 @@ class ApiManager {
       throw Exception('Failed to authenticate: $e');
     }
   }
+  Future<Map<String, dynamic>> logout() async {
+    final url = Uri.parse('$baseUrl/logout.php');
 
+    try {
+      final token = await storage.read(key: 'auth_token');
+
+      if (token == null) {
+        throw Exception('Token not found');
+      }
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'token': token}),
+      );
+
+      if (response.statusCode == 200) {
+        final jsonResponse = json.decode(response.body);
+        return jsonResponse;
+      } else {
+        throw Exception('Failed to logout: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error during logout: $e');
+    }
+  }
   Future<void> register(
       String name, String username, String password, String repassword) async {
     try {

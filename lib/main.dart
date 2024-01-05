@@ -3,7 +3,6 @@ import 'screens/splash.dart';
 import 'screens/login.dart';
 import 'screens/register.dart';
 import 'screens/home.dart';
-import 'screens/hotel.dart';
 import 'screens/admin/gethotel.dart';
 import 'screens/detail.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +36,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => SplashScreen(),
           '/login': (context) => MyLogin(),
           '/register': (context) => MyRegister(),
-          // '/home': (context) => HomeScreen(),
+          '/home': (context) => HomeScreen(),
           '/hotel': (context) => MyHotel(),
         },
         debugShowCheckedModeBanner: false,

@@ -16,9 +16,26 @@ class MyLogin extends StatelessWidget {
     final password = _passwordController.text;
 
     try {
-      final token = await apiManager.authenticate(username, password);
+      final response = await apiManager.authenticate(username, password);
+      final token = response['token'];
+      final userRole = response['role'];
       userManager.setAuthToken(token);
-      Navigator.pushReplacementNamed(context, '/hotel');
+
+      if (userRole == 'User') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Login Berhasil'),
+          ),
+        );
+        Navigator.pushReplacementNamed(context, '/home');
+      } else if (userRole == 'Admin') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Login Berhasil'),
+          ),
+        );
+        Navigator.pushReplacementNamed(context, '/hotel');
+      }
     } catch (e) {
       print('Authentication failed. Error: $e');
       // Handle authentication failure
@@ -70,6 +87,7 @@ class MyLogin extends StatelessWidget {
               child: TextField(
                 controller: _passwordController,
                 style: TextStyle(color: Colors.white),
+                obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'Password',
                   hintStyle: TextStyle(color: Colors.white),

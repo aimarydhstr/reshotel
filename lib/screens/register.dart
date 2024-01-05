@@ -18,8 +18,23 @@ class MyRegister extends StatelessWidget {
     final repassword = _repasswordController.text;
 
     try {
-      await apiManager.register(name, username, password, repassword);
-      Navigator.pushReplacementNamed(context, '/login');
+      if (password != repassword) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Password and Repeat Password harus sama.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return;
+      } else {
+        await apiManager.register(name, username, password, repassword);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Registrasi Berhasil'),
+          ),
+        );
+        Navigator.pushReplacementNamed(context, '/login');
+      }
     } catch (e) {
       print('Registration failed. Error: $e');
     }
@@ -89,6 +104,7 @@ class MyRegister extends StatelessWidget {
                 child: TextField(
                   controller: _passwordController,
                   style: TextStyle(color: Colors.white),
+                  obscureText: true,
                   decoration: InputDecoration(
                     hintText: 'Password',
                     hintStyle: TextStyle(color: Colors.white),
@@ -104,6 +120,7 @@ class MyRegister extends StatelessWidget {
                 child: TextField(
                   controller: _repasswordController,
                   style: TextStyle(color: Colors.white),
+                  obscureText: true,
                   decoration: InputDecoration(
                     hintText: 'Repeat Password',
                     hintStyle: TextStyle(color: Colors.white),

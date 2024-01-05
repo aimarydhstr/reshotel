@@ -72,6 +72,21 @@ class _MyHotelState extends State<MyHotel> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Hotel Management'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () {
+              apiManager.logout();
+              userManager.setAuthToken(null);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Logout Berhasil'),
+                ),
+              );
+              Navigator.pushReplacementNamed(context, '/login');
+            },
+          ),
+        ],
       ),
       body: ListView(
         children: [
