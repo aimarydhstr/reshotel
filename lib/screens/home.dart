@@ -65,6 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  Future<void> _refreshHotels() async {
+    await getHotels();
+  }
+
   @override
   Widget build(BuildContext context) {
     final apiManager = Provider.of<ApiManager>(context);
@@ -120,7 +124,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: ListView(
+      body: RefreshIndicator(
+        onRefresh: _refreshHotels,
+        child: ListView(
         children: [
           SizedBox(height: 16),
           GridView.builder(
@@ -181,6 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+    ),
     );
   }
 }

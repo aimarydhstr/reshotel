@@ -137,7 +137,6 @@ class MyLogin extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/home');
                     },
                   ),
                 ),
@@ -153,7 +152,6 @@ class MyLogin extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushNamed('/home');
                   },
                 ),
               ],

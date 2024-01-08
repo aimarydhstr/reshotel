@@ -65,6 +65,10 @@ class _MyHotelState extends State<MyHotel> {
     }
   }
 
+  Future<void> _refreshHotels() async {
+    await getHotels();
+  }
+
   @override
   Widget build(BuildContext context) {
     final apiManager = Provider.of<ApiManager>(context);
@@ -88,7 +92,9 @@ class _MyHotelState extends State<MyHotel> {
           ),
         ],
       ),
-      body: ListView(
+      body: RefreshIndicator(
+        onRefresh: _refreshHotels,
+        child: ListView(
         children: [
           SizedBox(height: 16),
           GridView.builder(
@@ -192,6 +198,7 @@ class _MyHotelState extends State<MyHotel> {
             },
           ),
         ],
+      ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
